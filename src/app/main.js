@@ -9,6 +9,7 @@ import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
 
+import { setLiveCells } from './actions/gameBoardActions';
 import App from './components/App';
 import appReducer from './reducers';
 
@@ -32,12 +33,12 @@ ReactDOM.render(
 setInterval(() => {
   const liveCells = store.getState().cellReducer.liveCells;
   console.log(liveCells)
-  const cellUpdate = computeCellUpdate(liveCells);
-  console.log(cellUpdate)
+  const newLiveCells = computeCellUpdate(liveCells);
+  console.log(newLiveCells)
+  store.dispatch(setLiveCells(newLiveCells));
 }, 1000);
 
 function computeCellUpdate(liveCells) {
-  const bornCells = [];
-  const deadCells = [];
-  return {bornCells, deadCells}
+  const newLiveCells = [];
+  return newLiveCells;
 }

@@ -89,6 +89,16 @@ function constructor(skeleton){
       .attr('y2', skeleton.getInnerHeight())
       .attr('stroke-width', 1)
       .attr('stroke', '#ccc');
+
+    layers.get('board')
+      .append('rect')
+      .attr('id', 'background')
+      .attr('width', skeleton.getInnerWidth())
+      .attr('height', skeleton.getInnerHeight())
+      .attr('fill', '#eee')
+      .on('click', (e) => {
+        console.log(e)
+      });
   }
 
   return skeleton.mixin({
