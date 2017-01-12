@@ -11,7 +11,6 @@ import createLogger from 'redux-logger';
 
 import App from './components/App';
 import appReducer from './reducers';
-import { setAbstracts } from './actions/abstractActions';
 
 const logger = createLogger();
 const store = createStore(

@@ -33,4 +33,4 @@ class GameBoard extends React.Component {
   }
 }
 
-export default WordTree;
+export default GameBoard;

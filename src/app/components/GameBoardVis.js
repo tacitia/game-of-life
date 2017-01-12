@@ -47,11 +47,9 @@ function constructor(skeleton){
   function visualize(){
     if(!skeleton.hasData()) return;
     const data = skeleton.data();
-    layers.get('connections').attr('transform', 'translate(' + options.termList.width + ', 0)');
-    layers.get('topic-list').attr('transform', 'translate(' + (options.termList.width + options.connections.width) + ', 0)');
-    visualizeTopTerms();
-    visualizeTopTopics();
-    visualizeConnections();
+    layers.get('board')
+      .selectAll('g')
+      .data(d3.range(100))
   }
 
   return skeleton.mixin({
