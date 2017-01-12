@@ -50,23 +50,37 @@ function constructor(skeleton){
   function visualize(){
     if(!skeleton.hasData()) return;
     const data = skeleton.data();
-
+    updateCells();
   }
 
-  function initializeCells() {
-    layers.get('cells')
+  function updateCells() {
+    const cellHeight = skeleton.getInnerHeight() / options.numRows;
+    const cellWidth = skeleton.getInnerWidth() / options.numColumns;
+
+    const cells = layers.get('cells')
       .selectAll('rect')
-      .data()
+      .data(skeleton.data().liveCells, (d, i) => d.x + '-' + d.y);
+    cells.exit().remove();
+    cells.enter()
+      .append('rect')
+      .attr('width', cellWidth)
+      .attr('height', cellHeight)
+      .attr('x', d => d.x * cellWidth)
+      .attr('y', d => d.y * cellHeight)
+      .attr('fill', 'steelblue');
   }
 
   function drawBoard() {
+    const rowHeight = skeleton.getInnerHeight() / options.numRows;
+    const columnWidth = skeleton.getInnerWidth() / options.numColumns;
+
     layers.get('board')
       .selectAll('.row-separator')
       .data(d3.range(options.numRows-1))
       .enter()
       .append('g')
       .attr('class', 'row-separator')
-      .attr('transform', d => 'translate(0, ' + (d+1) * skeleton.getInnerHeight() / options.numRows + ')')
+      .attr('transform', d => 'translate(0, ' + (d+1) * rowHeight + ')')
       .append('line')
       .attr('x1', 0)
       .attr('x2', skeleton.getInnerWidth())
@@ -81,7 +95,7 @@ function constructor(skeleton){
       .enter()
       .append('g')
       .attr('class', 'col-separator')
-      .attr('transform', d => 'translate(' + (d+1) * skeleton.getInnerWidth() / options.numColumns + ', 0)')
+      .attr('transform', d => 'translate(' + (d+1) * columnWidth + ', 0)')
       .append('line')
       .attr('x1', 0)
       .attr('x2', 0)
@@ -95,9 +109,10 @@ function constructor(skeleton){
       .attr('id', 'background')
       .attr('width', skeleton.getInnerWidth())
       .attr('height', skeleton.getInnerHeight())
-      .attr('fill', '#eee')
-      .on('click', (e) => {
-        console.log(e)
+      .attr('fill-opacity', 0)
+      .on('click', d => {
+        const x = Math.floor((d3.event.offsetX - options.margin.left) / columnWidth);
+        const y = Math.floor((d3.event.offsetY - options.margin.top) / rowHeight);
       });
   }
 
