@@ -38,7 +38,7 @@ const interval = setInterval(() => {
   const newLiveCells = computeCellUpdate(liveCells, 50, 50);
   store.dispatch(setLiveCells(newLiveCells));
   counter += 1;
-}, 100);
+}, 1500);
 
 function computeCellUpdate(liveCells, m, n) {
   const newLiveCells = [];

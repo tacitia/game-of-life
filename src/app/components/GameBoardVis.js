@@ -6,8 +6,8 @@ d3.tip = d3Tip;
 
 const DEFAULT_OPTIONS = {
   margin: {top: 50, right: 50, bottom: 50, left: 50},
-  initialWidth: 600,
-  initialHeight: 600,
+  initialWidth: 800,
+  initialHeight: 800,
   numRows: 50,
   numColumns: 50,
 };
@@ -60,14 +60,31 @@ function constructor(skeleton){
     const cells = layers.get('cells')
       .selectAll('rect')
       .data(skeleton.data().liveCells, (d, i) => d.x + '-' + d.y);
-    cells.exit().remove();
+    const deadCells = cells.exit();
+    deadCells.transition()
+      .duration(1200)
+      .style('fill', '#e04f2f')
+      .attr('width', cellWidth * 0.1)
+      .attr('height', cellHeight * 0.1)
+      .attr('x', d => d.x * cellWidth + cellWidth * 0.45)
+      .attr('y', d => d.y * cellHeight + cellHeight * 0.45)
+      .remove();
+
     cells.enter()
       .append('rect')
+      .attr('fill-opacity', 0.5)
+      .attr('width', cellWidth * 0.1)
+      .attr('height', cellHeight * 0.1)
+      .attr('x', d => d.x * cellWidth + cellWidth * 0.45)
+      .attr('y', d => d.y * cellHeight + cellHeight * 0.45)
+      .attr('fill', '#5fce52')
+      .transition()
+      .duration(500)
       .attr('width', cellWidth)
       .attr('height', cellHeight)
       .attr('x', d => d.x * cellWidth)
       .attr('y', d => d.y * cellHeight)
-      .attr('fill', 'steelblue');
+      .attr('fill', '#1a85dd');
   }
 
   function drawBoard() {
