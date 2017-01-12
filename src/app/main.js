@@ -30,5 +30,14 @@ ReactDOM.render(
 );
 
 setInterval(() => {
+  const liveCells = store.getState().cellReducer.liveCells;
+  console.log(liveCells)
+  const cellUpdate = computeCellUpdate(liveCells);
+  console.log(cellUpdate)
+}, 1000);
 
-}, 1000)
+function computeCellUpdate(liveCells) {
+  const bornCells = [];
+  const deadCells = [];
+  return {bornCells, deadCells}
+}
