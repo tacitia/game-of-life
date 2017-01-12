@@ -13,6 +13,10 @@ const cellReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         liveCells: [ ...state.liveCells, ...action.payload.cellLocations ]
       });
+    case cellActionTypes.SET_LIVE_CELLS:
+      return Object.assign({}, state, {
+        liveCells: action.payload.liveCells
+      });
     default:
       return state;
   }
