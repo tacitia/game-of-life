@@ -1,14 +1,11 @@
 {
-  "name": "session-lens",
+  "name": "game-of-life",
   "version": "0.0.0",
   "authors": [
-    "Krist Wongsuphasawat <kristw@twitter.com>",
-    "Hua Guo <hguo@twitter.com>"
+    "Hua Guo <hua_guo@brown.edu>"
   ],
-  "description": "A tool for exploratory session analysis.",
+  "description": "An implementation of Conway's Game of Life.",
   "keywords": [
-    "twitter",
-    "pulse"
   ],
   "license": "",
   "ignore": [
@@ -24,15 +21,9 @@
     "d3kit": "~1.0.9",
     "bootstrap": "~3.3.5",
     "json-editor": "~0.7.23",
-    "moment": "~2.10.6",
-    "axios": "~0.7.0",
     "file-saver.js": "~1.20150507.2",
-    "moment-timezone": "~0.4.1",
     "select2": "4.0.0",
     "sstooltip": "^4.2.0",
-    "jquery": "~2.1.4",
-    "jquery-ui": "~1.11.4",
-    "leaflet": "^0.7.7",
     "d3-tip": "^0.6.7"
   },
   "resolutions": {
