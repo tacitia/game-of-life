@@ -33,14 +33,14 @@ ReactDOM.render(
 var counter = 0;
 
 const interval = setInterval(() => {
-  if (counter > 2) clearInterval(interval);
+  if (counter > 20000) clearInterval(interval);
   const liveCells = store.getState().cellReducer.liveCells;
   console.log(liveCells)
   const newLiveCells = computeCellUpdate(liveCells, 50, 50);
   console.log(newLiveCells)
   store.dispatch(setLiveCells(newLiveCells));
   counter += 1;
-}, 1000);
+}, 10);
 
 function computeCellUpdate(liveCells, m, n) {
   const newLiveCells = [];

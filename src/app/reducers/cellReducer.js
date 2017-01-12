@@ -1,7 +1,7 @@
 import { cellActionTypes } from '../actions/gameBoardActions';
 
 const initialState = {
-  liveCells: [{x: 10, y: 10}, {x: 20, y: 20}]
+  liveCells: [{x: 10, y: 10}, {x: 20, y: 20},{x:11,y:10},{x:11, y:9},{x:9,y:10},{x:10,y:11}]
 };
 const cellReducer = (state = initialState, action) => {
   switch(action.type) {
