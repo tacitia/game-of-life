@@ -28,3 +28,7 @@ ReactDOM.render(
   ),
   document.getElementById('app')
 );
+
+setInterval(() => {
+
+}, 1000)

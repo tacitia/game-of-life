@@ -9,6 +9,10 @@ const cellReducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         liveCells: [ ...state.liveCells, action.payload.cellLocation ]
       });
+    case cellActionTypes.ACTIVATE_CELL_BATCH:
+      return Object.assign({}, state, {
+        liveCells: [ ...state.liveCells, ...action.payload.cellLocations ]
+      });
     default:
       return state;
   }
