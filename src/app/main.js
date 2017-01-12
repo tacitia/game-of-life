@@ -41,11 +41,13 @@ setInterval(() => {
 function computeCellUpdate(liveCells,m,n) {
   const newLiveCells = [];
   // create a zero matrix
+  var m = 30;
+  var n = 30;
   var matrix =  [];
   for(var i= 0; i<m; i++){
 		matrix[i] = [];
 		for(var j =0; j<n; j++){
-			mmatrix[i][j] = 0;
+			matrix[i][j] = 0;
 		}	
   }
   // set live position to be 1
@@ -68,38 +70,29 @@ function computeCellUpdate(liveCells,m,n) {
 				if(nx < 0 || ny < 0 || nx >= m || ny>= n){lives += 0;}
 				else {lives += matrix[nx][ny]%2;}
 			}
-			if(lives + matrix[i][j]== 3 or lives == 3){matrix[i][j] |= 2;}
+			if(lives + matrix[i][j]== 3||lives == 3){matrix[i][j] |= 2;}
 
 		}
 
 	}
 	
 	for(var i =0; i<m; i++){
-		for(var j=0; j<n; j ++)}{
+		for(var j=0; j<n; j++){
 			matrix[i][j] %= 2
 		}
 	
 	}
+	return matrix
+ }
 
-
-  updateMatrix(matrix)
-  for(var i =0; i<m; i++)}{
-	for(var j = 0; j<n; j++){
-		if(matrix[i][j] == 1){newLiveCells.push({x:i,y:j});}
+  var matrix = updateMatrix(matrix)
+  for(var i =0; i<m; i++){
+   for(var j = 0; j<n; j++){
+	if(matrix[i][j] == 1){newLiveCells.push({x:i,y:j});}
 		
-	}
+   }
 
-  }
-
-
-
-  }
-
-
-
-
-
-
+ }
 
 
 
