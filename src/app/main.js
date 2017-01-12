@@ -61,25 +61,25 @@ function computeCellUpdate(liveCells, m, n) {
   function updateMatrix(matrix){
   	var dx = [1,1,1,0,0,-1,-1,-1];
   	var dy = [1,0,-1,1,-1,1,0,-1];
-
   	for(var i= 0; i<m; i++){
   		for(var j = 0; j<n; j++){
   			var lives = 0;
   			for(var k = 0; k<8; k++){
-     			var nx =  i + dx[k];
+     				var nx =  i + dx[k];
   				var ny =  j + dy[k];
   				if(nx < 0 || ny < 0 || nx >= m || ny>= n){lives += 0;}
   				else {lives += matrix[nx][ny]%2;}
   			}
   			if(lives + matrix[i][j]== 3||lives == 3){matrix[i][j] |= 2;}
   		}
-	  }
-	 
+  	}
+	
   	for(var i =0; i<m; i++){
   		for(var j=0; j<n; j++){
-  			matrix[i][j] %= 2
+  			matrix[i][j]  >>= 1;
   		}
   	}
+  	return matrix
   }
 
   updateMatrix(matrix);
