@@ -30,19 +30,21 @@ ReactDOM.render(
   document.getElementById('app')
 );
 
-setInterval(() => {
+var counter = 0;
+
+const interval = setInterval(() => {
+  if (counter > 2) clearInterval(interval);
   const liveCells = store.getState().cellReducer.liveCells;
   console.log(liveCells)
-  const newLiveCells = computeCellUpdate(liveCells);
+  const newLiveCells = computeCellUpdate(liveCells, 50, 50);
   console.log(newLiveCells)
   store.dispatch(setLiveCells(newLiveCells));
+  counter += 1;
 }, 1000);
 
-function computeCellUpdate(liveCells,m,n) {
+function computeCellUpdate(liveCells, m, n) {
   const newLiveCells = [];
   // create a zero matrix
-  var m = 30;
-  var n = 30;
   var matrix =  [];
   for(var i= 0; i<m; i++){
 		matrix[i] = [];
@@ -52,52 +54,42 @@ function computeCellUpdate(liveCells,m,n) {
   }
   // set live position to be 1
   var lengthCells = liveCells.length;
-  for(var i=0; i < lengthCells; i++){
- 	matrix[liveCells[i].x][liveCells[i].y] = 1;
+  for(var i=0; i < lengthCells; i++) {
+   	matrix[liveCells[i].x][liveCells[i].y] = 1;
   } 
-  
-  
 
   function updateMatrix(matrix){
-	var dx = [1,1,1,0,0,-1,-1,-1];
-	var dy = [1,0,-1,1,-1,1,0,-1];
-	for(var i= 0; i<m; i++){
-		for(var j = 0; j<n; j++){
-			var lives = 0;
-			for(var k = 0; k<8; k++){
-   				var nx =  i + dx[k];
-				var ny =  j + dy[k];
-				if(nx < 0 || ny < 0 || nx >= m || ny>= n){lives += 0;}
-				else {lives += matrix[nx][ny]%2;}
-			}
-			if(lives + matrix[i][j]== 3||lives == 3){matrix[i][j] |= 2;}
+  	var dx = [1,1,1,0,0,-1,-1,-1];
+  	var dy = [1,0,-1,1,-1,1,0,-1];
 
-		}
+  	for(var i= 0; i<m; i++){
+  		for(var j = 0; j<n; j++){
+  			var lives = 0;
+  			for(var k = 0; k<8; k++){
+     			var nx =  i + dx[k];
+  				var ny =  j + dy[k];
+  				if(nx < 0 || ny < 0 || nx >= m || ny>= n){lives += 0;}
+  				else {lives += matrix[nx][ny]%2;}
+  			}
+  			if(lives + matrix[i][j]== 3||lives == 3){matrix[i][j] |= 2;}
+  		}
+	  }
+	 
+  	for(var i =0; i<m; i++){
+  		for(var j=0; j<n; j++){
+  			matrix[i][j] %= 2
+  		}
+  	}
+  }
 
-	}
-	
-	for(var i =0; i<m; i++){
-		for(var j=0; j<n; j++){
-			matrix[i][j] %= 2
-		}
-	
-	}
-	return matrix
- }
-
-  var matrix = updateMatrix(matrix)
+  updateMatrix(matrix);
   for(var i =0; i<m; i++){
-   for(var j = 0; j<n; j++){
-	if(matrix[i][j] == 1){newLiveCells.push({x:i,y:j});}
-		
-   }
-
- }
-
-
-
-
-
+    for(var j = 0; j<n; j++){
+      if(matrix[i][j] == 1) {
+        newLiveCells.push({x:i,y:j});
+      }
+    }
+  }
 
   return newLiveCells;
 }
