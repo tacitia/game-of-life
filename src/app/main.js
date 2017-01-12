@@ -78,7 +78,7 @@ function computeCellUpdate(liveCells,m,n) {
 	
 	for(var i =0; i<m; i++){
 		for(var j=0; j<n; j++){
-			matrix[i][j] %= 2
+			matrix[i][j]  >>= 1;
 		}
 	
 	}
