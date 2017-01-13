@@ -1,0 +1,47 @@
+{
+  "name": "d3kit",
+  "version": "1.0.11",
+  "authors": [
+    "Krist Wongsuphasawat <kristw@twitter.com>",
+    "Robert Harris <rharris@twitter.com>"
+  ],
+  "description": "A set of tools to speed D3 develompment.",
+  "main": "dist/d3kit.min.js",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "d3",
+    "visualization",
+    "javascript"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "resources",
+    "src",
+    "grunt",
+    "karma.conf.js",
+    "Gruntfile.js",
+    "package.json",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "d3": "~3.5.16"
+  },
+  "devDependencies": {
+    "chai": "~1.9.1"
+  },
+  "homepage": "https://github.com/twitter/d3kit",
+  "_release": "1.0.11",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.0.11",
+    "commit": "acb1053f3c9b28ac264ea3b7f0fd891963fe4dbd"
+  },
+  "_source": "https://github.com/twitter/d3kit.git",
+  "_target": "~1.0.9",
+  "_originalSource": "d3kit"
+}

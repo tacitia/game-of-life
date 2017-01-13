@@ -45,9 +45,9 @@ class GameBoard extends React.Component {
     return (
       <div className="game-board">
         <div className="control pull-right">
-          <Button bsStyle="link" bsSize="medium" onClick={this.onStartButtonClick}><i className="glyphicon glyphicon-play" /></Button>
-          <Button bsStyle="link" bsSize="medium" onClick={this.onPauseButtonClick}><i className="glyphicon glyphicon-pause" /></Button>
-          <Button bsStyle="link" bsSize="medium" onClick={this.onClearButtonClick}><i className="glyphicon glyphicon-repeat" /></Button>
+          <Button bsStyle="link" onClick={this.onStartButtonClick}><i className="glyphicon glyphicon-play" /></Button>
+          <Button bsStyle="link" onClick={this.onPauseButtonClick}><i className="glyphicon glyphicon-pause" /></Button>
+          <Button bsStyle="link" onClick={this.onClearButtonClick}><i className="glyphicon glyphicon-repeat" /></Button>
         </div>
         <GameBoardVis
           chartData={{
