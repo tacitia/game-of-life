@@ -33,11 +33,13 @@ ReactDOM.render(
 var counter = 0;
 
 const interval = setInterval(() => {
-  if (counter > 10000) clearInterval(interval);
-  const liveCells = store.getState().cellReducer.liveCells;
-  const newLiveCells = computeCellUpdate(liveCells, 50, 50);
-  store.dispatch(setLiveCells(newLiveCells));
-  counter += 1;
+  if (store.getState().controlReducer.lifeCycleStatus === 'running') {
+    if (counter > 10000) clearInterval(interval);
+    const liveCells = store.getState().cellReducer.liveCells;
+    const newLiveCells = computeCellUpdate(liveCells, 50, 50);
+    store.dispatch(setLiveCells(newLiveCells));
+    counter += 1;
+  }
 }, 1500);
 
 function computeCellUpdate(liveCells, m, n) {

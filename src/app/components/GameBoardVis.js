@@ -5,7 +5,7 @@ import d3Tip from 'd3-tip';
 d3.tip = d3Tip;
 
 const DEFAULT_OPTIONS = {
-  margin: {top: 50, right: 50, bottom: 50, left: 50},
+  margin: {top: 20, right: 50, bottom: 50, left: 50},
   initialWidth: 800,
   initialHeight: 800,
   numRows: 50,
@@ -13,7 +13,8 @@ const DEFAULT_OPTIONS = {
 };
 
 const CUSTOM_EVENTS = [
-  'cellClick'
+  'cellSelect',
+  'cellDeselect'
 ];
 
 
@@ -29,37 +30,19 @@ function constructor(skeleton){
 
   drawBoard();
 
-
-  //***************************************************//
-  //*********** Computation Functions Begin ***********//
-  //***************************************************//
-
-  //***************************************************//
-  //*********** Computation Functions End ***********//
-  //***************************************************//
-
-  //***************************************************//
-  //*********** Draw Functions Begin ***********//
-  //***************************************************//
-
-  //***************************************************//
-  //*********** Draw Functions End ***********//
-  //***************************************************//
-
-
   function visualize(){
     if(!skeleton.hasData()) return;
     const data = skeleton.data();
-    updateCells();
+    updateCells(skeleton.data().liveCells);
   }
 
-  function updateCells() {
+  function updateCells(cellData) {
     const cellHeight = skeleton.getInnerHeight() / options.numRows;
     const cellWidth = skeleton.getInnerWidth() / options.numColumns;
 
     const cells = layers.get('cells')
       .selectAll('rect')
-      .data(skeleton.data().liveCells, (d, i) => d.x + '-' + d.y);
+      .data(cellData, (d, i) => d.x + '-' + d.y);
     const deadCells = cells.exit();
     deadCells.transition()
       .duration(1200)
@@ -78,6 +61,11 @@ function constructor(skeleton){
       .attr('x', d => d.x * cellWidth + cellWidth * 0.45)
       .attr('y', d => d.y * cellHeight + cellHeight * 0.45)
       .attr('fill', '#5fce52')
+      .on('click', d => {
+        if (skeleton.data().lifeCycleStatus !== 'running') {
+          dispatch.cellDeselect(d);
+        }
+      })
       .transition()
       .duration(500)
       .attr('width', cellWidth)
@@ -128,8 +116,10 @@ function constructor(skeleton){
       .attr('height', skeleton.getInnerHeight())
       .attr('fill-opacity', 0)
       .on('click', d => {
+        if (skeleton.data().lifeCycleStatus === 'running') return;
         const x = Math.floor((d3.event.offsetX - options.margin.left) / columnWidth);
         const y = Math.floor((d3.event.offsetY - options.margin.top) / rowHeight);
+        dispatch.cellSelect({x, y});
       });
   }
 

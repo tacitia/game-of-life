@@ -1,18 +1,31 @@
 import { connect } from 'react-redux';
 
-import { activateCell } from '../actions/gameBoardActions';
+import { activateCell, deactivateCell, setLiveCells, startGame, pauseGame, clearGame } from '../actions/gameBoardActions';
 import GameBoard from '../components/GameBoard';
 
 const mapStateToProps = (state) => {
   return { 
-    liveCells: state.cellReducer.liveCells
+    liveCells: state.cellReducer.liveCells,
+    lifeCycleStatus: state.controlReducer.lifeCycleStatus
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    cellActivated: (cellLocation) => {
-      dispatch(activateCell(cellLocation));
+    onCellSelect: (c) => {
+      dispatch(activateCell(c));
+    },
+    onCellDeselect: (c) => {
+      dispatch(deactivateCell(c));
+    },
+    onStartButtonClick: () => {
+      dispatch(startGame());
+    },
+    onPauseButtonClick: () => {
+      dispatch(pauseGame());
+    },
+    onClearButtonClick: () => {
+      dispatch(clearGame());
     }
   };
 };
