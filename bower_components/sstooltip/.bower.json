@@ -1,0 +1,35 @@
+{
+  "name": "sstooltip",
+  "main": "dist/sstooltip.js",
+  "version": "4.2.0",
+  "homepage": "https://github.com/kristw/sstooltip",
+  "authors": [
+    "Krist Wongsuphasawat <krist.wongz@gmail.com>"
+  ],
+  "description": "A simple, stupid tooltip, but that's probably exactly what you need",
+  "keywords": [
+    "sstooltip",
+    "tooltip"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "src"
+  ],
+  "dependencies": {
+    "jquery": ">=1.8.2"
+  },
+  "_release": "4.2.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v4.2.0",
+    "commit": "84c3671b16b28b27a5ff7f6ef25dc8b10baf1d83"
+  },
+  "_source": "https://github.com/kristw/sstooltip.git",
+  "_target": "^4.2.0",
+  "_originalSource": "sstooltip"
+}
