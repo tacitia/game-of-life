@@ -1,8 +1,3 @@
-import fetch from 'isomorphic-fetch';
-
-import { API_URL } from '../constants/Enumerations';
-import Cookies from 'js-cookie';
-
 export const cellActionTypes = {
   SET_LIVE_CELLS: 'SET_LIVE_CELLS',
   ACTIVATE_CELL: 'ACTIVATE_CELL',

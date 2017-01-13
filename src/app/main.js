@@ -45,20 +45,15 @@ const interval = setInterval(() => {
 function computeCellUpdate(liveCells, m, n) {
   const newLiveCells = [];
   // create a zero matrix
-  const matrix = _.times(m, _.times(n, _.constant(0)));
-/*
+  const matrix = []
   for (var i = 0; i < m; i++){
-    matrix[i] = [];
-    for (var j = 0; j < n; j++){
-      matrix[i][j] = 0;
-    }	
+    matrix.push(_.times(n, _.constant(0)));
   }
-  */
+  
   // set live position to be 1
-  var lengthCells = liveCells.length;
-  for (var i = 0; i < lengthCells; i++) {
-    matrix[liveCells[i].x][liveCells[i].y] = 1;
-  } 
+  liveCells.forEach(c => {
+    matrix[c.x][c.y] = 1;
+  });
 
   updateMatrix(matrix);
 
